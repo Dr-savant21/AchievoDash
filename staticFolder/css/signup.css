@@ -1,0 +1,94 @@
+header {
+    background: rgba(24, 6, 185, 0.8);
+}
+
+main {
+    padding: 200px 0 120px;
+}
+
+form {
+    margin: auto;
+    background-color: #ebecf0;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+form .input-group {
+    position: relative;
+}
+
+form .input-group .label {
+    color: #1e4c82;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 50px;
+    top: 7px;
+    padding: 0 5px;
+    background: #ebecf0;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+form .input-group input {
+    width: 80%;
+    font-size: 16px;
+    height: 36px;
+    padding: 20px 5px 20px 10px;
+    background: #ebecf0;
+    color: #323840;
+    border: 1px solid #ced4da;
+    border-top-right-radius: 0.375rem !important;
+    border-bottom-right-radius: 0.375rem !important;
+    box-sizing: border-box;
+
+    &:focus {
+        outline: none;
+        border: 1px solid #3D85D8;
+
+        ~.label {
+            top: -13px;
+            font-size: 18px;
+        }
+    }
+}
+
+form .input-group input:not(:placeholder-shown) ~ .label {
+    top: -13px;
+    font-size: 18px;
+}
+
+.input-group-text {
+    position: relative;
+    cursor: pointer;
+    padding: 0.375rem 0.75rem;
+}
+
+.input-group-text .bi-unlock{
+    display: none;
+}
+
+.eye-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -22px !important;
+    position: relative;
+    cursor: pointer;
+}
+
+.eye-icon .bi-eye{
+    display: none;
+}
+
+.show .bi-eye,
+.show .bi-unlock{
+    display: inline-block;
+}
+
+.show .bi-eye-slash,
+.show .bi-lock{
+    display: none;
+}

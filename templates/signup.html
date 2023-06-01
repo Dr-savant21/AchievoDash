@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../staticFolder/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../staticFolder/vendor/remixicon/remixicon.css">
+    <!-- main css file -->
+    <link rel="stylesheet" href="../staticFolder/css/styles.css">
+    <link rel="stylesheet" href="../staticFolder/css/signup.css">
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center justify-content-between">
+            <h1 class="logo"><a href="{{ url_for('index') }}">Techie</a></h1>
+            <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="getstarted" href="{{ url_for('login') }}">Login</a></li>
+                    <li><a class="getstarted scrollto" href="{{ url_for('signup') }}">Signup</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+
+        </div>
+    </header>
+    <!-- End Header -->
+    <main class="container" id="home">
+
+        <form method="POST" action="" class="col-xl-5 col-lg-6 col-md-8" data-aos="fade-down">
+            <h3 class="mt-3 mb-4 text-center" data-aos="zoom-in">
+                <i class="bi bi-coin"></i>
+                IE-Tracker
+            </h3>
+            <div class="mb-3" data-aos="fade-left">
+                <div class="input-group">
+                    <div class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></div><input
+                        class="" id="exampleInputUsername"
+                        name="username" value="" placeholder=" ">
+                        <label for="exampleInputUsername" class="label">Username</label>
+                </div>
+                <div><small class="text-danger">
+                        {% for e in errors['username'] %}
+                            {{e}}
+                        {% endfor %}
+                    </small></div>
+            </div>
+            <div class="mb-3" data-aos="fade-right">
+                <div class="input-group">
+                    <div class="input-group-text" id="basic-addon1"><i class="bi bi-envelope"></i></div><input
+                        class="" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" name="email" value="" placeholder=" ">
+                        <label for="exampleInputEmail1" class="label">Email address</label>
+                </div>
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <div><small class="text-danger">
+                        {% for e in errors['email'] %}
+                            {{e}}
+                        {% endfor %}
+                    </small></div>
+            </div>
+            <div class="mb-3">
+                <div class="input-group" data-aos="fade-up">
+                    <div class="input-group-text input-normal" id="basic-addon1"><i class="bi bi-lock"></i><i class="bi bi-unlock"></i></div><input
+                        type="password" class=""
+                        id="exampleInputPassword1" name="password" value="" placeholder=" ">
+                        <div class="eye-icon normal">
+                            <i class="bi bi-eye"></i>
+                            <i class="bi bi-eye-slash"></i>
+                        </div>
+                        <label for="exampleInputPassword1" class="label">Password</label>
+                </div>
+                <div><small class="text-danger">
+                        {% for e in errors['password'] %}
+                            {{e}}
+                        {% endfor %}
+                    </small></div>
+            </div>
+            <div class="mb-3" data-aos="fade-down">
+                <div class="input-group">
+                    <div class="input-group-text input-confirm" id="basic-addon1"><i class="bi bi-lock"></i><i class="bi bi-unlock"></i></div><input
+                        type="password" class=""
+                        id="exampleInputPassword2" name="confirm_password" value="" placeholder=" ">
+                        <div class="eye-icon confirm">
+                            <i class="bi bi-eye-slash"></i>
+                            <i class="bi bi-eye"></i>
+                        </div>
+                        <label for="exampleInputPassword2" class="label">Confirm Password</label>
+                </div>
+                <div><small class="text-danger">
+                        {% for e in errors['cpassword'] %}
+                            {{e}}
+                        {% endfor %}
+                    </small></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <div class="mt-3"><small>Already have an account? <a href="signin.php">sign in</a></small></div>
+        </form>
+
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" data-aos="fade-down">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-info">
+                            <h3>Bootslander</h3>
+                            <p class="pb-3"><em>Qui repudiandae et eum dolores alias sed ea. Qui suscipit veniam
+                                    excepturi quod.</em>
+                            </p>
+                            <p>
+                                A108 Adam Street <br>
+                                NY 535022, USA<br><br>
+                                <strong>Phone:</strong> +1 5589 55488 55<br>
+                                <strong>Email:</strong> info@example.com<br>
+                            </p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Our Newsletter</h4>
+                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Bootslander</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+
+    <a href="#home" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="../staticFolder/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../staticFolder/vendor/aos/aos.js"></script>
+    <script src="../staticFolder/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../staticFolder/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../staticFolder/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../staticFolder/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../staticFolder/vendor/php-email-form/validate.js"></script>
+
+    <!-- main js file -->
+    <script src="../staticFolder/js/index.js"></script>
+</body>
+
+</html>
