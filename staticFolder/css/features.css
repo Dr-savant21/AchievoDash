@@ -1,0 +1,45 @@
+#hero ul {
+    list-style: none;
+    padding: 0;
+}
+
+#hero ul li {
+    padding: 0 0 10px 30px;
+    position: relative;
+    color: white;
+    /* font-weight: 600; */
+}
+
+#hero ul i {
+    position: absolute;
+    font-size: 30px;
+    left: 0;
+    top: -11px;
+    color: #1acc8d;
+}
+
+section ul {
+    list-style: none;
+    padding: 0;
+}
+
+section ul li {
+    padding: 0 0 10px 30px;
+    position: relative;
+}
+
+section ul i {
+    position: absolute;
+    font-size: 30px;
+    left: 0;
+    top: -11px;
+    color: #1ACC8D;
+}
+.icon{
+    font-size: 45px;
+    color: #1ACC8D;
+}
+
+.second .d-flex{ 
+    gap: 20px !important
+}

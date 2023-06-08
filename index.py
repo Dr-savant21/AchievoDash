@@ -15,7 +15,7 @@ def login():
     errors = {}
     if request.method == "POST":
         email = request.form['email']
-        password = request.form['password']
+        password = request.form['password'] 
         if not email.strip():
             errors['email'] = ["Email address field can't be empty"]
         else:
@@ -77,6 +77,10 @@ def signup():
 @app.route("/dashboard")
 def dashboard():
     return render_template("dashboard.html")
+
+@app.route("/logout")
+def logout():
+    return redirect(url_for('login'))
 
 email_pattern = r'^[\w.-]+@[a-zA-Z_-]+?\.[a-zA-Z]{2,3}$'
 
