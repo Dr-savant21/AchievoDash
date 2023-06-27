@@ -1,0 +1,193 @@
+.card{
+    margin-bottom: 15px;
+    background: #fff;
+    border-style: none;
+    text-align: center;
+    padding: 30px 20px;
+    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+
+.card .img img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #dee2e6;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075) !important;
+}
+
+.card p{
+    color: #8E8EAB;
+}
+
+.card .btn {
+    border: none !important;
+}
+
+.card .btn button {
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+    padding: 5px 8px;
+    background-color: #fff;
+    transition: 0.3s all ease-in-out;
+}
+
+.card .btn button:hover{
+    background-color: #F0F0F0;
+}
+
+.card .icon-option i{
+    font-size: 24px;
+    display: none;
+    transition: 0.3s all ease-in-out;
+    cursor: pointer;
+}
+
+.card .icon-option .ul{
+    display: none;
+    list-style-type: none;
+    text-align: left;
+    background-color: white;
+    width: 150px;
+    padding: 10px ;
+    position: absolute;
+    left: 0;
+    border: 1px solid #e5e5e5;
+    z-index: 100;
+}
+
+.card .show .ul{
+    display: block;
+}
+
+.card .icon-option .ul a{
+    display: block;
+}
+
+.card .icon-option .ul a:hover{
+    background-color: #EEF0F3;
+}
+
+.card .icon-option{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+}
+
+.vr{
+    padding: 0;
+}
+
+.info-details h6,
+.info-details p{
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    font-size: 14px;
+}
+
+.projects .card{
+    text-align: left;
+    color: #8E8EAB;
+}
+
+.card-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-head .icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.card-head .icon-edit,
+.card-head .icon-delete {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.card-head .icon-edit:hover,
+.card-head .icon-delete:hover {
+    background-color: #5846f9;
+    color: white;
+}
+
+.card-head .icon-edit{
+    color: #55CE63;
+    border-right: 1px solid #F0F0F0;
+}
+
+.card-head .icon-delete{
+    color: #F62D51;
+}
+
+.card-head h5{
+    font-size: 20px;
+    color: #000;
+}
+
+.card-head span,
+.card h6{
+    color: #000;
+    font-size: 14px;
+}
+
+.card img {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+    margin-right: -0.8em !important;
+    box-shadow: 0 0 0 2px #fff;
+    border-radius: 50%;
+}
+
+.card .progress-text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #000;
+}
+
+.card .progress-text p:last-child {
+    background-color: #F1C8DB !important;
+    border-radius: 6px;
+    font-weight: 700 !important;
+    padding: 5px 10px;
+}
+
+.task .in-progress{
+    border-top: 4px solid #FFBC34;
+}
+
+.task .completed{
+    border-top: 4px solid #7460EE;
+}
+
+.task .on-hold{
+    border-top: 4px solid #55CE63;
+}
+
+.task .pending{
+    border-top: 4px solid #F62D51;
+}
+
+.task .review{
+    border-top: 4px solid #009EFB;
+}
+
+.delete-icon-modal i{
+    font-size: 100px;
+    color: #F62D51;
+}

@@ -1,0 +1,223 @@
+.task .card{
+    margin-bottom: 15px;
+    background: #fff;
+    border-style: none;
+    border-top: 4px solid #1acc8d;
+    text-align: center;
+    padding: 30px 20px;
+    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+.task .in-progress{
+    border-top: 4px solid #FFBC34;
+}
+
+.task .completed{
+    border-top: 4px solid #7460EE;
+}
+
+.task .on-hold{
+    border-top: 4px solid #55CE63;
+}
+
+.task .pending{
+    border-top: 4px solid #F62D51;
+}
+
+.task .review{
+    border-top: 4px solid #009EFB;
+}
+
+.task .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task .card-head h5{
+    font-size: 16px;
+    color: #000;
+}
+
+.task .card-head .card-subhead .avatar img {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+    margin-right: -0.8em !important;
+    box-shadow: 0 0 0 2px #fff;
+    border-radius: 50%;
+}
+
+.task .card-head .card-subhead .avatar p {
+    font-size: 12px;
+}
+
+.task .card-body{
+    text-align: left;
+}
+
+.task .card-foot{
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task .card-foot span {
+    margin-right: 0.5rem;
+}
+
+.task .card-foot .project-title {
+    background-color: #F1C8DB !important;
+    border-radius: 6px;
+    font-weight: 700 !important;
+    font-size: 16px;
+    color: #000;
+}
+
+.details .card{
+    margin-bottom: 15px;
+    background: #fff;
+    border-style: none;
+    text-align: left;
+    padding: 30px 20px;
+    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+.details i.bi-pencil{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    transition: 0.3s all ease-in-out;
+    cursor: pointer;
+}
+
+.details .img img {
+    height: 216px;
+    object-fit: cover;
+    width: 216px;
+}
+
+.file img {
+    width: 30px;
+    height: 30px;
+}
+
+.desc {
+    border: 1px solid #DDDDDD;
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.desc .progress-text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #000;
+}
+
+.desc .progress-text p:last-child {
+    border-radius: 6px;
+    font-weight: 700 !important;
+    padding: 5px 10px;
+}
+
+.teamadded .img img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.delete-icon-modal i{
+    font-size: 100px;
+    color: #F62D51;
+}
+
+.page-link{
+    cursor: pointer;
+}
+
+.img .icon-delete  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.img .icon-delete {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.img .icon-delete:hover  {
+    background-color: #5846f9;
+    color: white;
+}
+.img .icon-delete {
+    color: #F62D51;
+}
+.img .icon-delete {
+    position: absolute;
+    right: 3%;
+    top: 2%;
+    display: none;
+}
+.task-img{
+    position: relative;
+}
+.img:hover .icon-delete{
+    display: inline;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filecard .icon-option i{
+    font-size: 24px;
+    display: none;
+    transition: 0.3s all ease-in-out;
+    cursor: pointer;
+}
+
+.filecard .icon-option .ul{
+    display: none;
+    list-style-type: none;
+    text-align: left;
+    background-color: white;
+    width: 150px;
+    padding: 10px ;
+    position: absolute;
+    left: 0;
+    border: 1px solid #e5e5e5;
+    z-index: 100;
+}
+
+.filecard .show .ul{
+    display: block;
+}
+
+.filecard .icon-option .ul a{
+    display: block;
+}
+
+.filecard .icon-option .ul a:hover{
+    background-color: #EEF0F3;
+}
+
+.filecard .icon-option{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+}
+
+.filecard{
+    position: relative;
+}

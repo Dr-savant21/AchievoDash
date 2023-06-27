@@ -52,95 +52,98 @@
             </h3>
             <div class="mb-3" data-aos="fade-left">
                 <div class="input-group">
-                    <div class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></div><input
-                        class="" id="exampleInputUsername"
-                        name="username" value="" placeholder=" ">
-                        <label for="exampleInputUsername" class="label">Username</label>
+                    <div class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></div><input class=""
+                        id="exampleInputUsername" name="username" value="" placeholder=" ">
+                    <label for="exampleInputUsername" class="label">Username</label>
                 </div>
                 <div><small class="text-danger">
                         {% for e in errors['username'] %}
-                            {{e}}
+                        {{e}}
                         {% endfor %}
                     </small></div>
             </div>
             <div class="mb-3" data-aos="fade-right">
                 <div class="input-group">
-                    <div class="input-group-text" id="basic-addon1"><i class="bi bi-envelope"></i></div><input
-                        class="" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" name="email" value="" placeholder=" ">
-                        <label for="exampleInputEmail1" class="label">Email address</label>
+                    <div class="input-group-text" id="basic-addon1"><i class="bi bi-envelope"></i></div><input class=""
+                        id="exampleInputEmail1" aria-describedby="emailHelp" name="email" value="" placeholder=" ">
+                    <label for="exampleInputEmail1" class="label">Email address</label>
                 </div>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 <div><small class="text-danger">
                         {% for e in errors['email'] %}
-                            {{e}}
+                        {{e}}
                         {% endfor %}
                     </small></div>
             </div>
             <div class="mb-3">
                 <div class="input-group" data-aos="fade-up">
-                    <div class="input-group-text input-normal" id="basic-addon1"><i class="bi bi-lock"></i><i class="bi bi-unlock"></i></div><input
-                        type="password" class=""
-                        id="exampleInputPassword1" name="password" value="" placeholder=" ">
-                        <div class="eye-icon normal">
-                            <i class="bi bi-eye"></i>
-                            <i class="bi bi-eye-slash"></i>
-                        </div>
-                        <label for="exampleInputPassword1" class="label">Password</label>
+                    <div class="input-group-text input-normal" id="basic-addon1"><i class="bi bi-lock"></i><i
+                            class="bi bi-unlock"></i></div><input type="password" class="" id="exampleInputPassword1"
+                        name="password" value="" placeholder=" ">
+                    <div class="eye-icon normal">
+                        <i class="bi bi-eye"></i>
+                        <i class="bi bi-eye-slash"></i>
+                    </div>
+                    <label for="exampleInputPassword1" class="label">Password</label>
                 </div>
                 <div><small class="text-danger">
                         {% for e in errors['password'] %}
-                            {{e}}
+                        {{e}}
                         {% endfor %}
                     </small></div>
             </div>
             <div class="mb-3" data-aos="fade-down">
                 <div class="input-group">
-                    <div class="input-group-text input-confirm" id="basic-addon1"><i class="bi bi-lock"></i><i class="bi bi-unlock"></i></div><input
-                        type="password" class=""
-                        id="exampleInputPassword2" name="confirm_password" value="" placeholder=" ">
-                        <div class="eye-icon confirm">
-                            <i class="bi bi-eye-slash"></i>
-                            <i class="bi bi-eye"></i>
-                        </div>
-                        <label for="exampleInputPassword2" class="label">Confirm Password</label>
+                    <div class="input-group-text input-confirm" id="basic-addon1"><i class="bi bi-lock"></i><i
+                            class="bi bi-unlock"></i></div><input type="password" class="" id="exampleInputPassword2"
+                        name="confirm_password" value="" placeholder=" ">
+                    <div class="eye-icon confirm">
+                        <i class="bi bi-eye-slash"></i>
+                        <i class="bi bi-eye"></i>
+                    </div>
+                    <label for="exampleInputPassword2" class="label">Confirm Password</label>
                 </div>
                 <div><small class="text-danger">
                         {% for e in errors['cpassword'] %}
-                            {{e}}
+                        {{e}}
                         {% endfor %}
                     </small></div>
             </div>
             <button type="submit" class="btn btn-primary">Sign Up</button>
-            <div class="mt-3"><small>Already have an account? <a href="signin.php">sign in</a></small></div>
+            <div class="mt-3"><small>Already have an account? <a href="{{ url_for('login') }}">sign in</a></small></div>
         </form>
 
     </main>
 
     <!-- ======= Footer ======= -->
-    <footer id="footer" data-aos="fade-down">
+    <footer id="footer">
         <div class="footer-top">
             <div class="container">
                 <div class="row">
 
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-info">
-                            <h3>Bootslander</h3>
-                            <p class="pb-3"><em>Qui repudiandae et eum dolores alias sed ea. Qui suscipit veniam
-                                    excepturi quod.</em>
+                            <h3>AchievoDash</h3>
+                            <p class="pb-3"><em>Stay connected with us for the latest updates and news on our products
+                                    and services.</em>
                             </p>
                             <p>
-                                A108 Adam Street <br>
-                                NY 535022, USA<br><br>
-                                <strong>Phone:</strong> +1 5589 55488 55<br>
-                                <strong>Email:</strong> info@example.com<br>
+                                37b second west circular road, <br>
+                                Benin City, Edo State<br><br>
+                                <strong>Phone:</strong> +234 805 7980 962<br>
+                                <strong>Email:</strong> israelnosakhare21@gmail.com<br>
                             </p>
                             <div class="social-links mt-3">
-                                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                                <a href="https://twitter.com/Izzy_windz/" class="twitter"><i
+                                        class="bx bxl-twitter"></i></a>
+                                <a href="https://web.facebook.com/israel.ajagboye/" class="facebook"><i
+                                        class="bx bxl-facebook"></i></a>
+                                <a href="https://www.instagram.com/izzywindz03/" class="instagram"><i
+                                        class="bx bxl-instagram"></i></a>
+                                <a href="https://medium.com/@isreal4christ21" class="google-plus"><i
+                                        class="bx bxl-medium"></i></a>
+                                <a href="https://www.linkedin.com/in/israel-ajagboye/" class="linkedin"><i
+                                        class="bx bxl-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
@@ -148,9 +151,9 @@
                     <div class="col-lg-2 col-md-6 footer-links">
                         <h4>Useful Links</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#home">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#about">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#services">Services</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
                         </ul>
@@ -159,18 +162,25 @@
                     <div class="col-lg-2 col-md-6 footer-links">
                         <h4>Our Services</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/collaboration.html">Collaboration</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/task.html">Task management</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/goal.html">Goal tracking</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/analytics.html">Performance analytics</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/integration.html">Integration capabilities</a>
+                            </li>
                         </ul>
                     </div>
 
                     <div class="col-lg-4 col-md-6 footer-newsletter">
                         <h4>Our Newsletter</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                        <form action="" method="post">
+                        <p>Subscribe to our newsletter and be the first to receive exclusive offers, product updates,
+                            and valuable insights delivered straight to your inbox.</p>
+                        <form action="mailto:israelnosakhare21@gmail.com" method="post">
                             <input type="email" name="email"><input type="submit" value="Subscribe">
                         </form>
 
@@ -182,10 +192,10 @@
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>Bootslander</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>AchievoDash</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                Designed by <a href="https://dr-savant21.github.io/Israel_Ajagboye_portfolio/">SavantcodeTech</a>
             </div>
         </div>
     </footer>

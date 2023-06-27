@@ -414,6 +414,10 @@ section {
     .navbar ul {
         display: none;
     }
+
+    .vr{
+        display: none;
+    }
 }
 
 .navbar-mobile {
@@ -506,6 +510,7 @@ section {
 
 .navbar-mobile .dropdown ul a {
     padding: 10px 20px;
+    justify-content: space-evenly;
 }
 
 .navbar-mobile .dropdown ul a i {
@@ -956,6 +961,11 @@ section {
     background: #343a40;
     position: relative;
     overflow: hidden;
+}
+
+.team img{
+    height: 270px;
+    object-fit: cover;
 }
 
 .team .member .member-info {

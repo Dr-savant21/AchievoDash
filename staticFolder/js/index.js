@@ -229,5 +229,5 @@ eyeIcon2.addEventListener("click", function(){
     eyeIcon2.classList.toggle("show")
     inputGroup2.classList.toggle("show")
     const type = inputPass2.getAttribute("type") === "password" ? "text" : "password";
-    inputPass2.setAttribute("type", type) = "text"
+    inputPass2.setAttribute("type", type)
 })

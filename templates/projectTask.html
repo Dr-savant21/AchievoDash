@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AchievoDash -Empower Your Productivity. Unleash Your Potential</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../staticFolder/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../staticFolder/vendor/remixicon/remixicon.css">
+    <!-- main css file -->
+    <link rel="stylesheet" href="../staticFolder/css/styles.css">
+    <link rel="stylesheet" href="../staticFolder/css/dashboard.css">
+    <link rel="stylesheet" href="../staticFolder/css/task.css">
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <h1 class="logo"><a href="{{ url_for('index') }}">Techie</a></h1>
+            <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="getstarted" href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+
+        </div>
+    </header>
+
+    <main class="bg-light">
+        <div class="container d-flex align-items-center justify-content-between" id="home">
+
+            <!-- Trigger for offcanvas -->
+            <div class="d-flex align-items-center">
+                <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                    href="#offcanvasWithBothOptions" role="button" aria-controls="offcanvasWithBothOptions">
+                    <i class="bi bi-list text-dark" style="font-size: 30px"></i>
+                </a>
+                <h4 class="ms-2 my-0 d-sm-block d-none">Task Management</h4>
+            </div>
+
+            <aside>
+                <!-- offcanvas -->
+                <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                    aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">AchievoDash</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="list-group">
+                            <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-speedometer2"></i> &nbsp; Dashboard</li>
+                            </a>
+                            <a href="{{ url_for('projects') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-boxes"></i> &nbsp; Projects</li>
+                            </a>
+                            <a href="{{ url_for('task') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-card-checklist"></i> &nbsp; Tasks</li>
+                            </a>
+                            <a href="{{ url_for('team') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-people-fill"></i> &nbsp; Team members</li>
+                            </a>
+                            <a href="{{ url_for('calendar') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-calendar-date"></i> &nbsp; Project Calendar
+                                </li>
+                            </a>
+                            <a href="{{ url_for('goal') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-bag-heart"></i> &nbsp; Goals</li>
+                            </a>
+                            <a href="{{ url_for('profile') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-person-circle"></i> &nbsp; Profile</li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- button trigger for add task modal form -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal"
+                data-bs-whatever="@mdo"><i class="bi bi-plus-circle-fill"></i> Create Task</button>
+            <!-- add task modal -->
+            <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">New Task</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/create_task" method="post">
+                                <div class="mb-3">
+                                    <label for="projectTitle">Project name</label>
+                                    <select name="projectTitle" id="projectTitle"
+                                        class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                        <option value="empty"></option>
+                                        {% for project in projects %}
+                                        <option value="{{ project.id }}">{{ project.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <div>
+                                        <small class="text-danger">
+
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="target" class="label">Task Title</label>
+                                    <div class="input-group">
+                                        <input class="target form-control" id="target" name="target" value=""
+                                            placeholder=" " type="text">
+                                    </div>
+                                    <div>
+                                        <small class="text-danger">
+
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Description</label>
+                                    <textarea class="form-control" id="message-text" name="message-text"></textarea>
+                                    <div>
+                                        <small class="text-danger">
+
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="projectTitle">Task priority</label>
+                                    <select name="taskpriority" id="taskpriority"
+                                        class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                        <option value="empty"></option>
+                                        <option value="Highest">Highest</option>
+                                        <option value="High">High</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Low">Low</option>
+                                        <option value="Lowest">Lowest</option>
+                                    </select>
+                                    <div>
+                                        <small class="text-danger">
+
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="taskstatus">Status</label>
+                                    <select name="taskstatus" id="taskstatus"
+                                        class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                        <option value="empty"></option>
+                                        <option value="in-progress">in-Progress</option>
+                                        <option value="completed">Completed</option>
+                                        <option value="on-hold">On-Hold</option>
+                                        <option value="review">Review</option>
+                                        <option value="pending">Pending</option>
+                                    </select>
+                                    <div>
+                                        <small class="text-danger">
+
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <div class="col-6">
+                                        <label for="taskStart" class="col-form-label">Start</label>
+                                        <input class="mb-2 form-control" id="taskStart" name="taskStart" value=""
+                                            placeholder=" " type="datetime-local">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="taskEnd" class="col-form-label">End</label>
+                                        <input class="form-control" id="taskEnd" name="taskEnd" value="" placeholder=" "
+                                            type="datetime-local">
+                                    </div>
+                                    <div>
+                                        <small class="text-danger">
+
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Add Task</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination mt-3">
+                    <li class="page-item">
+                        <a class="page-link" data-target="all">All</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" data-target="in-progress">in-progress</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" data-target="completed">completed</a></li>
+                    <li class="page-item"><a class="page-link" data-target="on-hold">on-hold</a></li>
+                    <li class="page-item">
+                        <a class="page-link" data-target="pending">pending</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" data-target="review">needs review</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container">
+            <div class="row task">
+                {% if tasks %}
+                {% for task in tasks %}
+                <div class="col-lg-4">
+                    <div class="card {{ task.taskstatus}}" data-card="{{ task.taskstatus}}" id="card-{{ task.id }}">
+                        <a href="{{ url_for('taskdetails', task_id=task.id) }}">
+                            <div class="card-head">
+                                <h5 class="bg-primary px-3 py-1">{{ task.task_title }}</h5>
+                                <div class="card-subhead">
+                                    <div class="avatar">
+                                        <img src="../staticFolder/images/avatar1.jpg" alt="avatar">
+                                        <img src="../staticFolder/images/avatar2.jpg" alt="avatar">
+                                        <img src="../staticFolder/images/avatar3.jpg" alt="avatar">
+                                        <p class="badge bg-warning d-block mt-2">{{ task.task_priority }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>{{ task.description | truncate_description(20) }}.</p>
+                            </div>
+                            <div class="card-foot d-flex">
+                                <div class="subdetails">
+                                    <span> <i class="bi bi-flag"></i>
+                                        {% if task.end_date %}
+                                        <span>{{ task.end_date.strftime('%Y-%m-%d %H:%M') }}</span>
+                                        {% endif %}
+                                    </span>
+                                    <span> <i class="bi bi-chat-square-text-fill"></i> 5</span>
+                                    <span> <i class="bi bi-link"></i></span>
+                                </div>
+                                <div class="project-title px-2 py-1">
+                                    {{ task.project_title }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="none card shadow-sm text-center">
+                    <p>No Task added </p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-info">
+                            <h3>AchievoDash</h3>
+                            <p class="pb-3"><em>Stay connected with us for the latest updates and news on our products
+                                    and services.</em>
+                            </p>
+                            <p>
+                                37b second west circular road, <br>
+                                Benin City, Edo State<br><br>
+                                <strong>Phone:</strong> +234 805 7980 962<br>
+                                <strong>Email:</strong> israelnosakhare21@gmail.com<br>
+                            </p>
+                            <div class="social-links mt-3">
+                                <a href="https://twitter.com/Izzy_windz/" class="twitter"><i
+                                        class="bx bxl-twitter"></i></a>
+                                <a href="https://web.facebook.com/israel.ajagboye/" class="facebook"><i
+                                        class="bx bxl-facebook"></i></a>
+                                <a href="https://www.instagram.com/izzywindz03/" class="instagram"><i
+                                        class="bx bxl-instagram"></i></a>
+                                <a href="https://medium.com/@isreal4christ21" class="google-plus"><i
+                                        class="bx bxl-medium"></i></a>
+                                <a href="https://www.linkedin.com/in/israel-ajagboye/" class="linkedin"><i
+                                        class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#home">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#about">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#services">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/collaboration.html">Collaboration</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/task.html">Task management</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/goal.html">Goal tracking</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/analytics.html">Performance analytics</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/integration.html">Integration capabilities</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Our Newsletter</h4>
+                        <p>Subscribe to our newsletter and be the first to receive exclusive offers, product updates,
+                            and valuable insights delivered straight to your inbox.</p>
+                        <form action="mailto:israelnosakhare21@gmail.com" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>AchievoDash</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="https://dr-savant21.github.io/Israel_Ajagboye_portfolio/">SavantcodeTech</a>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+
+    <a href="#home" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="../staticFolder/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../staticFolder/vendor/aos/aos.js"></script>
+    <script src="../staticFolder/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../staticFolder/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../staticFolder/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../staticFolder/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../staticFolder/vendor/php-email-form/validate.js"></script>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- main js file -->
+    <script src="../staticFolder/js/task.js"></script>
+    <script src="../staticFolder/js/index.js"></script>
+</body>
+
+</html>

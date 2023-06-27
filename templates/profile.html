@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AchievoDash -Empower Your Productivity. Unleash Your Potential</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../staticFolder/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../staticFolder/vendor/remixicon/remixicon.css">
+    <!-- main css file -->
+    <link rel="stylesheet" href="../staticFolder/css/styles.css">
+    <link rel="stylesheet" href="../staticFolder/css/dashboard.css">
+    <link rel="stylesheet" href="../staticFolder/css/profile.css">
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <h1 class="logo"><a href="{{ url_for('index') }}">Techie</a></h1>
+            <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="getstarted" href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+
+        </div>
+    </header>
+
+    <main class="bg-light">
+        <div class="container d-flex align-items-center justify-content-between" id="home">
+
+            <!-- Trigger for offcanvas -->
+            <div class="d-flex align-items-center">
+                <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                    href="#offcanvasWithBothOptions" role="button" aria-controls="offcanvasWithBothOptions">
+                    <i class="bi bi-list text-dark" style="font-size: 30px"></i>
+                </a>
+                <h4 class="ms-2 my-0 d-sm-block d-none">User Profile</h4>
+            </div>
+
+            <aside>
+                <!-- offcanvas -->
+                <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                    aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">AchievoDash</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="list-group">
+                            <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-speedometer2"></i> &nbsp; Dashboard</li>
+                            </a>
+                            <a href="{{ url_for('projects') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-boxes"></i> &nbsp; Projects</li>
+                            </a>
+                            <a href="{{ url_for('task') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-card-checklist"></i> &nbsp; Tasks</li>
+                            </a>
+                            <a href="{{ url_for('team') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-people-fill"></i> &nbsp; Team members</li>
+                            </a>
+                            <a href="{{ url_for('calendar') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-calendar-date"></i> &nbsp; Project Calendar
+                                </li>
+                            </a>
+                            <a href="{{ url_for('goal') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-bag-heart"></i> &nbsp; Goals</li>
+                            </a>
+                            <a href="{{ url_for('profile') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-person-circle"></i> &nbsp; Profile</li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+        <div class="container">
+            <div class="shadow-sm card">
+                <a role="button" data-bs-toggle="modal" data-bs-target="#editUserModal-{{ userprofile.id }}" data-bs-whatever="@mdo" data-bs-id="{{ userprofile.id }}">
+                    <i class="bi bi-pencil"></i>
+                </a>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-between"
+                        style="gap: 1.5rem;">
+                        <div class="img">
+                            <a role="button" data-bs-toggle="modal" data-bs-target="#editUserimageModal-{{ userprofile.id }}"
+                                data-bs-whatever="@mdo" data-bs-id="{{ userprofile.id }}">
+                                {% if userprofile.image %}
+                                <img src="{{ url_for('get_image', userprofile_id=userprofile.id) }}" alt="" class="img-fluid">
+                                {% else %}
+                                <i class="bi bi-person-circle"></i>
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="info text-start">
+                            <h4>{{ userprofile.firstname }} {{ userprofile.lastname }}</h4>
+                            <h6>{{ userprofile.job }}</h6>
+                            <p>{{ userprofile.description }}.</p>
+                            <p>Date joined: {{ user_created_at }}</p>
+                        </div>
+                        <div class="vr"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 info-details mt-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="text-start">Phone:</h6>
+                                <h6 class="text-start">Gender:</h6>
+                                <h6 class="text-start">Email:</h6>
+                                <h6 class="text-start">Address:</h6>
+                            </div>
+                            <div class="col-6">
+                                <p class="text-start">{{ userprofile.phonenumber }}</p>
+                                <p class="text-start">{{ userprofile.gender }}</p>
+                                <p class="text-start">{{ user_email }}</p>
+                                <p class="text-start">{{ userprofile.address }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="card shadow-sm personal-details">
+                        <a role="button" data-bs-toggle="modal" data-bs-target="#editUserPersonalModal-{{ userprofile.id }}" data-bs-whatever="@mdo" data-bs-id="{{ userprofile.id }}">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <h4 class="text-start">Personal details</h4>
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="text-start">Country:</h6>
+                                <h6 class="text-start">State:</h6>
+                                <h6 class="text-start">City:</h6>
+                                <h6 class="text-start">Religion:</h6>
+                                <h6 class="text-start">Marital status:</h6>
+                            </div>
+                            <div class="col-6">
+                                <p class="text-start">{{ userprofile.country }}</p>
+                                <p class="text-start">{{ userprofile.state }}</p>
+                                <p class="text-start">{{ userprofile.city }}</p>
+                                <p class="text-start">{{ userprofile.religion }}</p>
+                                <p class="text-start">{{ userprofile.maritalstatus }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="card shadow-sm emergency-details">
+                        <a role="button" data-bs-toggle="modal" data-bs-target="#editUserEmergencyModal-{{ userprofile.id }}" data-bs-whatever="@mdo" data-bs-id="{{ userprofile.id }}">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <h4 class="text-start">Emergency details</h4>
+                        <h6 class="text-start">Primary</h6>
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="text-start">Name:</h6>
+                                <h6 class="text-start">Relationship:</h6>
+                                <h6 class="text-start">Email:</h6>
+                                <h6 class="text-start">Phone:</h6>
+                                <h6 class="text-start">Nationality:</h6>
+                                <h6 class="text-start">Religion:</h6>
+                            </div>
+                            <div class="col-6">
+                                <p class="text-start">{{ userprofile.emergencyprimaryname }}</p>
+                                <p class="text-start">{{ userprofile.emergencyprimaryrelationship }}</p>
+                                <p class="text-start">{{ userprofile.emergencyprimaryemail }}</p>
+                                <p class="text-start">{{ userprofile.emergencyprimarynumber }}</p>
+                                <p class="text-start">{{ userprofile.emergencyprimarynationality }}</p>
+                                <p class="text-start">{{ userprofile.emergencyprimaryreligion }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <h6 class="text-start">Secondary</h6>
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="text-start">Name:</h6>
+                                <h6 class="text-start">Relationship:</h6>
+                                <h6 class="text-start">Email:</h6>
+                                <h6 class="text-start">Phone:</h6>
+                                <h6 class="text-start">Nationality:</h6>
+                                <h6 class="text-start">Religion:</h6>
+                            </div>
+                            <div class="col-6">
+                                <p class="text-start">{{ userprofile.emergencysecondaryname }}</p>
+                                <p class="text-start">{{ userprofile.emergencysecondaryrelationship }}</p>
+                                <p class="text-start">{{ userprofile.emergencysecondaryemail }}</p>
+                                <p class="text-start">{{ userprofile.emergencysecondarynumber }}</p>
+                                <p class="text-start">{{ userprofile.emergencysecondarynationality }}</p>
+                                <p class="text-start">{{ userprofile.emergencysecondaryreligion }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- edit user image modal -->
+        <div class="modal fade" id="editUserimageModal-{{ userprofile.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Change Profile Picture</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/upload/{{ userprofile.id }}" enctype="multipart/form-data">
+                            <div class="img">
+                                {% if userprofile.image %}
+                                <img src="{{ url_for('get_image', userprofile_id=userprofile.id) }}" alt="" class="img-fluid">
+                                {% else %}
+                                <i class="bi bi-person-circle"></i>
+                                {% endif %}
+                                <input type="file" id="myFileInput" onchange="handleFileInputChange(event)" name="image">
+                                <label for="myFileInput" id="fileInputLabel">Edit</label>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- edit user details modal -->
+        <div class="modal fade" id="editUserModal-{{ userprofile.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit User Details</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/userprofile_details/{{ userprofile.id }}">
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="firstname" class="col-form-label">Firstname</label>
+                                    <input class="mb-2 form-control" id="firstname" name="firstname" value="{{ userprofile.firstname }}"
+                                        placeholder=" " type="text">
+                                </div>
+                                <div class="col-6">
+                                    <label for="lastname" class="col-form-label">Lastname</label>
+                                    <input class="mb-2 form-control" id="lastname" name="lastname" value="{{ userprofile.lastname }}"
+                                        placeholder=" " type="text">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="job" class="form-control-label">Job</label>
+                                <input type="text" class="form-control" id="job" name="job" placeholder=" " value="{{ userprofile.job }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="shortdescription" class="form-control-label">Short Description</label>
+                                <textarea name="shortdescription" id="shortdescription" class="form-control">{{ userprofile.description }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-control-label">Address</label>
+                                <input type="text" class="form-control" id="address" name="address" placeholder=" " 
+                                    value="{{ userprofile.address }}">
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="phonenumber" class="col-form-label">Phone number</label>
+                                    <input class="mb-2 form-control" id="phonenumber" name="phonenumber" value="{{ userprofile.phonenumber }}"
+                                        placeholder=" " type="number">
+                                </div>
+                                <div class="col-6">
+                                    <label for="gender" class="col-form-label">Gender</label>
+                                    <select name="gender" id="gender" class="form-select">
+                                        <option value="empty">{{ userprofile.gender }}</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="nosay">Prefer not to say</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- edit user personal details modal -->
+        <div class="modal fade" id="editUserPersonalModal-{{ userprofile.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit User Personal Details</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/userprofilepersonal_details/{{ userprofile.id }}">
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="country" class="col-form-label">Country</label>
+                                    <input class="mb-2 form-control" id="country" name="country" value="{{ userprofile.country }}"
+                                        placeholder=" " type="text">
+                                </div>
+                                <div class="col-6">
+                                    <label for="state" class="col-form-label">State</label>
+                                    <input class="mb-2 form-control" id="state" name="state" value="{{ userprofile.state }}" placeholder=" "
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="city" class="col-form-label">City</label>
+                                    <input class="mb-2 form-control" id="city" name="city" value="{{ userprofile.city }}" placeholder=" "
+                                        type="text">
+                                </div>
+                                <div class="col-6">
+                                    <label for="religion" class="col-form-label">Religion</label>
+                                    <input class="mb-2 form-control" id="religion" name="religion" value="{{ userprofile.religion }}"
+                                        placeholder=" " type="text">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="country" class="col-form-label">Marital Status</label>
+                                    <select name="maritalstatus" id="maritalstatus" class="form-select">
+                                        <option value="empty">{{ userprofile.maritalstatus }}</option>
+                                        <option value="married">Married</option>
+                                        <option value="single">Single</option>
+                                        <option value="divorce">Divorced</option>
+                                        <option value="widowed">Widowed</option>
+                                        <option value="regPartner">Registered Partnership</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- edit user emergency details modal -->
+        <div class="modal fade" id="editUserEmergencyModal-{{ userprofile.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit User Emergency Details</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/userprofileemergency_details/{{ userprofile.id }}">
+                            <h4>Primary</h4>
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="emergencyprimaryname" class="col-form-label">Name</label>
+                                    <input class="mb-2 form-control" id="emergencyprimaryname"
+                                        name="emergencyprimaryname" value="{{ userprofile.emergencyprimaryname }}" placeholder=" " type="text">
+                                </div>
+                                <div class="col-6">
+                                    <label for="emergencyprimaryrelationship"
+                                        class="col-form-label">Relationship</label>
+                                    <input class="mb-2 form-control" id="emergencyprimaryrelationship"
+                                        name="emergencyprimaryrelationship" value="{{ userprofile.emergencyprimaryrelationship}}" placeholder=" " type="text">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="emergencyprimaryemail" class="col-form-label">Email</label>
+                                    <input class="mb-2 form-control" id="emergencyprimaryemail"
+                                        name="emergencyprimaryemail" value="{{ userprofile.emergencyprimaryemail }}" placeholder=" " type="email">
+                                </div>
+                                <div class="col-6">
+                                    <label for="emergencyprimarynumber" class="col-form-label">Phone number</label>
+                                    <input class="mb-2 form-control" id="emergencyprimarynumber"
+                                        name="emergencyprimarynumber" value="{{ userprofile.emergencyprimarynumber }}" placeholder=" " type="number">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="emergencyprimarynationality" class="col-form-label">Nationality</label>
+                                    <input type="text" class="form-control mb-2" id="emergencyprimarynationality"
+                                        name="emergencyprimarynationality" value="{{ userprofile.emergencyprimarynationality }}">
+                                </div>
+                                <div class="col-6">
+                                    <label for="emergencyprimaryreligion" class="col-form-label">Religion</label>
+                                    <input class="mb-2 form-control" id="emergencyprimaryreligion"
+                                        name="emergencyprimaryreligion" value="{{ userprofile.emergencyprimaryreligion }}" placeholder=" " type="text">
+                                </div>
+                            </div>
+                            <h4>Secondary</h4>
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="emergencysecondaryname" class="col-form-label">Name</label>
+                                    <input class="mb-2 form-control" id="emergencysecondaryname"
+                                        name="emergencysecondaryname" value="{{ userprofile.emergencysecondaryname }}" placeholder=" " type="text">
+                                </div>
+                                <div class="col-6">
+                                    <label for="emergencysecondaryrelationship"
+                                        class="col-form-label">Relationship</label>
+                                    <input class="mb-2 form-control" id="emergencysecondaryrelationship"
+                                        name="emergencysecondaryrelationship" value="{{ userprofile.emergencysecondaryrelationship }}" placeholder=" " type="text">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="emergencysecondaryemail" class="col-form-label">Email</label>
+                                    <input class="mb-2 form-control" id="emergencysecondaryemail"
+                                        name="emergencysecondaryemail" value="{{ userprofile.emergencysecondaryemail }}" placeholder=" " type="email">
+                                </div>
+                                <div class="col-6">
+                                    <label for="emergencysecondarynumber" class="col-form-label">Phone number</label>
+                                    <input class="mb-2 form-control" id="emergencysecondarynumber"
+                                        name="emergencysecondarynumber" value="{{ userprofile.emergencysecondarynumber }}" placeholder=" " type="number">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="emergencysecondarynationality"
+                                        class="col-form-label">Nationality</label>
+                                    <input type="text" class="form-control mb-2" id="emergencysecondarynationality"
+                                        name="emergencysecondarynationality" value="{{ userprofile.emergencysecondarynationality }}">
+                                </div>
+                                <div class="col-6">
+                                    <label for="emergencysecondaryreligion" class="col-form-label">Religion</label>
+                                    <input class="mb-2 form-control" id="emergencysecondaryreligion"
+                                        name="emergencysecondaryreligion" value="{{ userprofile.emergencysecondaryreligion }}" placeholder=" " type="text">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-info">
+                            <h3>AchievoDash</h3>
+                            <p class="pb-3"><em>Stay connected with us for the latest updates and news on our products
+                                    and services.</em>
+                            </p>
+                            <p>
+                                37b second west circular road, <br>
+                                Benin City, Edo State<br><br>
+                                <strong>Phone:</strong> +234 805 7980 962<br>
+                                <strong>Email:</strong> israelnosakhare21@gmail.com<br>
+                            </p>
+                            <div class="social-links mt-3">
+                                <a href="https://twitter.com/Izzy_windz/" class="twitter"><i
+                                        class="bx bxl-twitter"></i></a>
+                                <a href="https://web.facebook.com/israel.ajagboye/" class="facebook"><i
+                                        class="bx bxl-facebook"></i></a>
+                                <a href="https://www.instagram.com/izzywindz03/" class="instagram"><i
+                                        class="bx bxl-instagram"></i></a>
+                                <a href="https://medium.com/@isreal4christ21" class="google-plus"><i
+                                        class="bx bxl-medium"></i></a>
+                                <a href="https://www.linkedin.com/in/israel-ajagboye/" class="linkedin"><i
+                                        class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#home">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#about">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#services">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/collaboration.html">Collaboration</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/task.html">Task management</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/goal.html">Goal tracking</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/analytics.html">Performance analytics</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/integration.html">Integration capabilities</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Our Newsletter</h4>
+                        <p>Subscribe to our newsletter and be the first to receive exclusive offers, product updates,
+                            and valuable insights delivered straight to your inbox.</p>
+                        <form action="mailto:israelnosakhare21@gmail.com" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>AchievoDash</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="https://dr-savant21.github.io/Israel_Ajagboye_portfolio/">SavantcodeTech</a>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+
+    <a href="#home" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="../staticFolder/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../staticFolder/vendor/aos/aos.js"></script>
+    <script src="../staticFolder/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../staticFolder/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../staticFolder/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../staticFolder/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../staticFolder/vendor/php-email-form/validate.js"></script>
+
+    <!-- main js file -->
+    <script src="../staticFolder/js/profile.js"></script>
+    <script src="../staticFolder/js/index.js"></script>
+</body>
+
+</html>

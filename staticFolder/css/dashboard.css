@@ -54,7 +54,222 @@ form .input-group input {
     }
 }
 
-form .input-group input:not(:placeholder-shown) ~ .label {
-    top: -13px;
-    font-size: 18px;
+form .input-group  .projectTitle{
+    width: 100%;
+    font-size: 16px;
+    height: 36px;
+    padding: 20px 5px 20px 10px;
+    color: #7a7a7a;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem !important;
+    box-sizing: border-box;
+    outline-color: #ced4da;
+
+    &:focus {
+        outline: none;
+        border: 1px solid #3D85D8;
+    }
+}
+
+.intro .card {
+    height: 100%;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+    border-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.intro .card .icon{
+    background-color: #5846f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    color: #000;
+}
+
+.card .details{
+    color: #000;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card .details .value{
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.task .card{
+    margin-bottom: 15px;
+    background: #fff;
+    border-style: none;
+    border-top: 4px solid #1acc8d;
+    text-align: center;
+    padding: 30px 20px;
+    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+.task .in-progress{
+    border-top: 4px solid #FFBC34;
+}
+
+.task .completed{
+    border-top: 4px solid #7460EE;
+}
+
+.task .on-hold{
+    border-top: 4px solid #55CE63;
+}
+
+.task .pending{
+    border-top: 4px solid #F62D51;
+}
+
+.task .review{
+    border-top: 4px solid #009EFB;
+}
+
+.task .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task .card-head h5{
+    font-size: 16px;
+    color: #000;
+}
+
+.task .card-head .card-subhead .avatar img {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+    margin-right: -0.8em !important;
+    box-shadow: 0 0 0 2px #fff;
+    border-radius: 50%;
+}
+
+.task .card-head .card-subhead .avatar p {
+    font-size: 12px;
+}
+
+.task .card-body{
+    text-align: left;
+}
+
+.task .card-foot{
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task .card-foot span {
+    margin-right: 0.5rem;
+}
+
+.task .card-foot .project-title {
+    background-color: #F1C8DB !important;
+    border-radius: 6px;
+    font-weight: 700 !important;
+    font-size: 16px;
+    color: #000;
+}
+
+.goals .card {
+    margin-bottom: 15px;
+    background: #fff;
+    border-style: none;
+    border-top: 4px solid #1acc8d;
+    text-align: center;
+    padding: 30px 20px;
+    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+.goals .card .status-text{
+    background-color: #1acc8d;
+    border-radius: 6px;
+    font-weight: 700 !important; 
+    font-size: 16px;
+}
+
+.team {
+    margin-bottom: 15px;
+    background: #fff;
+    border-style: none;
+    text-align: center;
+    padding: 30px 20px;
+    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+.team i{
+    font-size: 70px;
+    color: #b2b2b2;
+}
+
+.team h5{
+    color: #8e8e8e;
+    margin-top: 0;
+}
+
+.team h4{
+    color: #000;
+    margin-bottom: 0;
+}
+
+.team .member-status{
+    background-color: #5846f9;
+    border-radius: 6px;
+    font-weight: 700 !important; 
+    font-size: 16px;
+    color: #fff;
+}
+
+.recents-projects{
+    margin-bottom: 15px;
+    background: #fff;
+    border-style: none;
+    padding: 30px 20px;
+    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+.head,
+.table-head,
+.table-body,
+.table-foot{
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.table-body a{
+    display: block;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.table-body span{
+    font-size: 12px;
+}
+
+.table-foot{
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.none {
+    font-size: 24px !important;
+    font-weight: bold;
 }

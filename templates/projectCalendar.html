@@ -3,9 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AchievoDash -Empower Your Productivity. Unleash Your Potential.</title>
+    <title>AchievoDash -Empower Your Productivity. Unleash Your Potential</title>
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -21,20 +20,19 @@
     <link rel="stylesheet" href="../staticFolder/vendor/remixicon/remixicon.css">
     <!-- main css file -->
     <link rel="stylesheet" href="../staticFolder/css/styles.css">
-    <link rel="stylesheet" href="../staticFolder/css/login.css">
+    <link rel="stylesheet" href="../staticFolder/css/dashboard.css">
 </head>
 
 <body>
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="{{ url_for('index') }}">AchievoDash</a></h1>
+            <h1 class="logo"><a href="{{ url_for('index') }}">Techie</a></h1>
             <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="getstarted" href="{{ url_for('login') }}">Login</a></li>
-                    <li><a class="getstarted scrollto" href="{{ url_for('signup') }}">Signup</a></li>
+                    <li><a class="getstarted" href="{{ url_for('logout') }}">Logout</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
@@ -42,50 +40,59 @@
 
         </div>
     </header>
-    <!-- End Header -->
-    <main class="container" id="home">
 
-        <form method="POST" action="" class="col-lg-5 col-md-8" data-aos="fade-up">
-            <h3 class="mt-3 mb-4 text-center" data-aos="zoom-in">
-                <i class="bi bi-coin"></i>
-                AchievoDash
-            </h3>
-            <div class="mb-3" data-aos="fade-left">
-                <div class="input-group">
-                    <div class="input-group-text" id="basic-addon1"><i class="bi bi-envelope"></i></div><input class=""
-                        id="exampleInputEmail1" aria-describedby="emailHelp" name="email" value="" placeholder=" ">
-                    <label for="" class="label">Email address</label>
-                </div>
-                <small id="emailHelp" class="form-text">We'll never share your email with anyone else.</small>
-                <div><small class="text-danger">
-                        {% for e in errors['email'] %}
-                        {{e}}
-                        {% endfor %}
-                    </small></div>
+    <main class="bg-light">
+        <div class="container d-flex align-items-center justify-content-between" id="home">
+
+            <!-- Trigger for offcanvas -->
+            <div class="d-flex align-items-center">
+                <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                    href="#offcanvasWithBothOptions" role="button" aria-controls="offcanvasWithBothOptions">
+                    <i class="bi bi-list text-dark" style="font-size: 30px"></i>
+                </a>
+                <h4 class="ms-2 my-0 d-sm-block d-none">Welcome {{ username }}</h4>
             </div>
-            <div class="mb-3" data-aos="fade-right">
-                <div class="input-group">
-                    <div class="input-group-text input-normal" id="basic-addon1"><i class="bi bi-lock"></i><i
-                            class="bi bi-unlock"></i></div><input type="password" class="" id="exampleInputPassword1"
-                        name="password" value="" placeholder=" ">
-                    <div class="eye-icon normal">
-                        <i class="bi bi-eye-slash"></i>
-                        <i class="bi bi-eye"></i>
+
+            <aside>
+                <!-- offcanvas -->
+                <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                    aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">AchievoDash</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
                     </div>
-                    <label for="exampleInputPassword1" class="label">Password</label>
+                    <div class="offcanvas-body">
+                        <ul class="list-group">
+                            <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-speedometer2"></i> &nbsp; Dashboard</li>
+                            </a>
+                            <a href="{{ url_for('projects') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-boxes"></i> &nbsp; Projects</li>
+                            </a>
+                            <a href="{{ url_for('task') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-card-checklist"></i> &nbsp; Tasks</li>
+                            </a>
+                            <a href="{{ url_for('team') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-people-fill"></i> &nbsp; Team members</li>
+                            </a>
+                            <a href="{{ url_for('calendar') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-calendar-date"></i> &nbsp; Project Calendar
+                                </li>
+                            </a>
+                            <a href="{{ url_for('goal') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-bag-heart"></i> &nbsp; Goals</li>
+                            </a>
+                            <a href="{{ url_for('profile') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-person-circle"></i> &nbsp; Profile</li>
+                            </a>
+                        </ul>
+                    </div>
                 </div>
-                <div><small class="text-danger">
-                        {% for e in errors['password'] %}
-                        {{e}}
-                        {% endfor %}
-                    </small></div>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign In</button>
-            <div class="mt-3"><small>New Here? <a href="{{ url_for('signup') }}">sign up</a></small></div>
-        </form>
+            </aside>
 
+        </div>
     </main>
-
     <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="footer-top">
@@ -96,8 +103,7 @@
                         <div class="footer-info">
                             <h3>AchievoDash</h3>
                             <p class="pb-3"><em>Stay connected with us for the latest updates and news on our products
-                                    and
-                                    services.</em>
+                                    and services.</em>
                             </p>
                             <p>
                                 37b second west circular road, <br>
@@ -137,14 +143,11 @@
                             <li><i class="bx bx-chevron-right"></i> <a
                                     href="../staticFolder/html/services/collaboration.html">Collaboration</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a
-                                    href="../staticFolder/html/services/task.html">Task
-                                    management</a></li>
+                                    href="../staticFolder/html/services/task.html">Task management</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a
-                                    href="../staticFolder/html/services/goal.html">Goal
-                                    tracking</a></li>
+                                    href="../staticFolder/html/services/goal.html">Goal tracking</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a
-                                    href="../staticFolder/html/services/analytics.html">Performance
-                                    analytics</a></li>
+                                    href="../staticFolder/html/services/analytics.html">Performance analytics</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a
                                     href="../staticFolder/html/services/integration.html">Integration capabilities</a>
                             </li>
@@ -154,8 +157,7 @@
                     <div class="col-lg-4 col-md-6 footer-newsletter">
                         <h4>Our Newsletter</h4>
                         <p>Subscribe to our newsletter and be the first to receive exclusive offers, product updates,
-                            and valuable
-                            insights delivered straight to your inbox.</p>
+                            and valuable insights delivered straight to your inbox.</p>
                         <form action="mailto:israelnosakhare21@gmail.com" method="post">
                             <input type="email" name="email"><input type="submit" value="Subscribe">
                         </form>

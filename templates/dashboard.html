@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocuAchievoDash -Empower Your Productivity. Unleash Your Potential.ment</title>
+    <title>AchievoDash -Empower Your Productivity. Unleash Your Potential</title>
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -43,8 +43,8 @@
     </header>
     <!-- End Header -->
 
-    <main>
-        <div class="container d-flex align-items-center justify-content-between">
+    <main class="bg-light">
+        <div class="container d-flex align-items-center justify-content-between" id="home">
 
             <!-- Trigger for offcanvas -->
             <div class="d-flex align-items-center">
@@ -52,7 +52,7 @@
                     href="#offcanvasWithBothOptions" role="button" aria-controls="offcanvasWithBothOptions">
                     <i class="bi bi-list text-dark" style="font-size: 30px"></i>
                 </a>
-                <h4 class="ms-2 my-0 d-sm-block d-none">Welcome back</h4>
+                <h4 class="ms-2 my-0 d-sm-block">Welcome back {{ username }}</h4>
             </div>
 
             <aside>
@@ -60,7 +60,7 @@
                 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
                     aria-labelledby="offcanvasExampleLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">EXPENSE TRACKER V.1.0.0</h5>
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">AchievoDash</h5>
                         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                             aria-label="Close"></button>
                     </div>
@@ -69,23 +69,24 @@
                             <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
                                 <li class="list-group-item"><i class="bi bi-speedometer2"></i> &nbsp; Dashboard</li>
                             </a>
-                            <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
-                                <li class="list-group-item"><i class="bi bi-cash-coin"></i> &nbsp; Projects</li>
+                            <a href="{{ url_for('projects') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-boxes"></i> &nbsp; Projects</li>
                             </a>
-                            <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
-                                <li class="list-group-item"><i class="bi bi-cash"></i> &nbsp; Team members</li>
+                            <a href="{{ url_for('task') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-card-checklist"></i> &nbsp; Tasks</li>
                             </a>
-                            <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
-                                <li class="list-group-item"><i class="bi bi-calendar-date"></i> &nbsp; Project Calendar</li>
+                            <a href="{{ url_for('team') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-people-fill"></i> &nbsp; Team members</li>
                             </a>
-                            <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
+                            <a href="{{ url_for('calendar') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-calendar-date"></i> &nbsp; Project Calendar
+                                </li>
+                            </a>
+                            <a href="{{ url_for('goal') }}" class="text-decoration-none">
                                 <li class="list-group-item"><i class="bi bi-bag-heart"></i> &nbsp; Goals</li>
                             </a>
-                            <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
-                                <li class="list-group-item"><i class="bi bi-bag-heart"></i> &nbsp; Total Workflow</li>
-                            </a>
-                            <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
-                                <li class="list-group-item"><i class="bi bi-bag-heart"></i> &nbsp; Profile</li>
+                            <a href="{{ url_for('profile') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-person-circle"></i> &nbsp; Profile</li>
                             </a>
                         </ul>
                     </div>
@@ -105,13 +106,12 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form method="POST" action="/add_project" enctype="multipart/form-data">
                                 <div class="mb-3">
+                                    <label for="projectTitle" class="label">Project Title</label>
                                     <div class="input-group">
-                                        <div class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i>
-                                        </div><input class="" id="exampleInputUsername" name="username" value=""
-                                            placeholder=" " type="text">
-                                        <label for="exampleInputUsername" class="label">Project Title</label>
+                                        <input class="projectTitle form-control" id="projectTitle" name="projectTitle"
+                                            value="" placeholder=" " type="text">
                                     </div>
                                     <div>
                                         <small class="text-danger">
@@ -120,24 +120,47 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Project Description:</label>
-                                    <textarea class="form-control" id="message-text"></textarea>
+                                    <label for="message-text" class="col-form-label">Project Description</label>
+                                    <textarea class="form-control" id="message-text" name="message-text"></textarea>
                                 </div>
                                 <div>
                                     <small class="text-danger">
 
                                     </small>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="Project Duration" class="col-form-label">Project Duration:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-text mb-2" id="basic-addon1">Start:
-                                        </div>
-                                        <input class="mb-2" id="ProjectDuration" name="start" value=""
+                                <div class="mb-3 row">
+                                    <div class="col-6">
+                                        <label for="files" class="col-form-label">Upload files</label>
+                                        <input class="mb-2 form-control" id="files" name="files" value=""
+                                            placeholder=" " type="file">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="projectPriority" class="col-form-label">Priority</label>
+                                        <select name="projectPriority" id="projectPriority"
+                                            class="form-select form-select mb-3" aria-label=".form-select example">
+                                            <option value=""></option>
+                                            <option value="Highest">Highest</option>
+                                            <option value="High">High</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="Low">Low</option>
+                                            <option value="Lowest">Lowest</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <small class="text-danger">
+
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <div class="col-6">
+                                        <label for="projectStart" class="col-form-label">Start</label>
+                                        <input class="mb-2 form-control" id="projectStart" name="projectStart" value=""
                                             placeholder=" " type="datetime-local">
-                                        <div class="input-group-text" id="basic-addon1" style="border-bottom-left-radius: 0.375rem !important;border-top-left-radius: 0.375rem !important;">End:
-                                        </div>
-                                        <input class="" id="ProjectDuration" name="end" value=""
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="projectEnd" class="col-form-label">End</label>
+                                        <input class="form-control" id="projectEnd" name="projectEnd" value=""
                                             placeholder=" " type="datetime-local">
                                     </div>
                                     <div>
@@ -146,11 +169,12 @@
                                         </small>
                                     </div>
                                 </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Add project</button>
+                                </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Send message</button>
                         </div>
                     </div>
                 </div>
@@ -158,32 +182,569 @@
 
         </div>
 
+        <div class="container pt-3">
+            <div class="row intro">
+                <div class="col-lg-4 col-md-4 mb-3">
+                    <a href="{{ url_for('projects') }}">
+                        <div class="card">
+                            <div class="icon">
+                                <i class="bi bi-boxes"></i>
+                            </div>
+                            <div class="details">
+                                <div class="value"><span id="totalProjects"></span></div>
+                                <div class="text">Projects</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 mb-3">
+                    <a href="{{ url_for('task') }}">
+                        <div class="card">
+                            <div class="icon">
+                                <i class="bi bi-list-check"></i>
+                            </div>
+                            <div class="details">
+                                <div class="value">{{ total_tasks }}</div>
+                                <div class="text">Task</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 mb-3">
+                    <a href="{{ 'team' }}">
+                        <div class="card">
+                            <div class="icon">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <div class="details">
+                                <div class="value">5</div>
+                                <div class="text">Team members</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <h5>Project analytics</h5>
+                    <div class="recents-projects">
+                        <div class="head row">
+                            <h5>Recents Projects</h5>
+                        </div>
+                        <div class="table-head row">
+                            <h6 class="col-6">Project name</h6>
+                            <h6 class="col-6">Progess</h6>
+                        </div>
+                        <!-- if project is none -->
+                        {% if projects %}
+                        {% for project in projects %}
+                        <div class="table-body row">
+                            {% set project_info = project_data[loop.index0] %}
+                            <div class="projects-title col-6">
+                                <a href="{{ url_for('projectdetails', project_id=project.id) }}">{{ project.title }}</a>
+                                <span>{{ project_info.total_tasks }}</span> <span>Tasks</span>
+                            </div>
+                            <div class="col-6 pt-3">
+                                <div class="progress" role="progressbar" aria-label="Info example"
+                                    aria-valuenow="{{ project_info.progress_percentage }}" aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    <div class="progress-bar bg-info text-dark"
+                                        style="width: {{ project_info.progress_percentage }}%">{{
+                                        project_info.progress_percentage }}%</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="none text-center">
+                            <p>No project added</p>
+                        </div>
+                        {% endif %}
+                        <div class="table-foot row">
+                            <a href="{{ url_for('projects') }}">View more projects</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 mt-3">
+                    <h5>Task analytics</h5>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h5 class="mb-3">Ongoing Tasks:</h5>
+            <div class="row mb-4 task">
+                {% if ongoing_tasks %}
+                {% for ongoing_task in ongoing_tasks %}
+                <div class="col-lg-4">
+                    <div class="card in-progress">
+                        <a href="{{ url_for('taskdetails', task_id=ongoing_task.id) }}">
+                            <div class="card-head">
+                                <h5 class="bg-primary px-3 py-1">{{ ongoing_task.task_title }}</h5>
+                                <div class="card-subhead">
+                                    <div class="avatar">
+                                        <img src="../staticFolder/images/avatar1.jpg" alt="avatar">
+                                        <img src="../staticFolder/images/avatar2.jpg" alt="avatar">
+                                        <img src="../staticFolder/images/avatar3.jpg" alt="avatar">
+                                        <p class="badge bg-warning d-block mt-2">{{ ongoing_task.task_priority }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>{{ ongoing_task.description | truncate_description(20) }}</p>
+                            </div>
+                            <div class="card-foot d-flex">
+                                <div class="subdetails">
+                                    {% if ongoing_task.end_date %}
+                                    <span>{{ ongoing_task.end_date.strftime('%Y-%m-%d %H:%M') }}</span>
+                                    {% endif %}
+                                    <span> <i class="bi bi-chat-square-text-fill"></i> 5</span>
+                                    <span> <i class="bi bi-link"></i></span>
+                                </div>
+                                <div class="project-title px-2 py-1">
+                                    {{ ongoing_task.project_title }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="none card shadow-sm in-progress">
+                    <p>No On going tasks</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container">
+            <h5 class="mb-3">Completed Tasks:</h5>
+            <div class="row mb-4 task">
+                {% if completed_tasks %}
+                {% for completed_task in completed_tasks %}
+                <div class="col-lg-4">
+                    <div class="card completed">
+                        <a href="{{ url_for('taskdetails', task_id=completed_task.id) }}">
+                            <div class="card-head">
+                                <h5 class="bg-primary px-3 py-1">{{ completed_task.task_title }}</h5>
+                                <div class="card-subhead">
+                                    <div class="avatar">
+                                        <img src="../staticFolder/images/avatar1.jpg" alt="avatar">
+                                        <img src="../staticFolder/images/avatar2.jpg" alt="avatar">
+                                        <img src="../staticFolder/images/avatar3.jpg" alt="avatar">
+                                        <p class="badge bg-warning d-block mt-2">{{ completed_task.task_priority }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>{{ completed_task.description | truncate_description(20) }}</p>
+                            </div>
+                            <div class="card-foot d-flex">
+                                <div class="subdetails">
+                                    {% if completed_task.end_date %}
+                                    <span>{{ completed_task.end_date.strftime('%Y-%m-%d %H:%M') }}</span>
+                                    {% endif %}
+                                    <span> <i class="bi bi-chat-square-text-fill"></i> 5</span>
+                                    <span> <i class="bi bi-link"></i></span>
+                                </div>
+                                <div class="project-title px-2 py-1">
+                                    {{ completed_task.project_title }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="none card shadow-sm completed">
+                    <p>No task completed</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container">
+            <h5 class="mb-3">Onhold Tasks:</h5>
+            <div class="row mb-4 task">
+                {% if onhold_tasks %}
+                {% for onhold_task in onhold_tasks %}
+                <div class="col-lg-4">
+                    <div class="card on-hold">
+                        <a href="{{ url_for('taskdetails', task_id=onhold_task.id) }}">
+                            <div class="card-head">
+                                <h5 class="bg-primary px-3 py-1">{{ onhold_task.task_title }}</h5>
+                                <div class="card-subhead">
+                                    <div class="avatar">
+                                        <img src="../staticFolder/images/avatar1.jpg" alt="avatar">
+                                        <img src="../staticFolder/images/avatar2.jpg" alt="avatar">
+                                        <img src="../staticFolder/images/avatar3.jpg" alt="avatar">
+                                        <p class="badge bg-warning d-block mt-2">{{ onhold_task.task_priority }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>{{ onhold_task.description | truncate_description(20) }}</p>
+                            </div>
+                            <div class="card-foot d-flex">
+                                <div class="subdetails">
+                                    {% if onhold_task.end_date %}
+                                    <span>{{ onhold_task.end_date.strftime('%Y-%m-%d %H:%M') }}</span>
+                                    {% endif %}
+                                    <span> <i class="bi bi-chat-square-text-fill"></i> 5</span>
+                                    <span> <i class="bi bi-link"></i></span>
+                                </div>
+                                <div class="project-title px-2 py-1">
+                                    {{ onhold_task.project_title }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="none card shadow-sm on-hold">
+                    <p>No task placed on hold</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container">
+            <h5 class="mb-3">Pending Tasks:</h5>
+            <div class="row mb-4 task">
+                {% if pending_tasks %}
+                {% for pending_task in pending_tasks %}
+                <div class="col-lg-4">
+                    <div class="card pending">
+                        <a href="{{ url_for('taskdetails', task_id=pending_task.id) }}">
+                            <div class="card-head">
+                                <h5 class="bg-primary px-3 py-1">{{ pending_task.task_title }}</h5>
+                                <div class="card-subhead">
+                                    <div class="avatar">
+                                        <img src="../staticFolder/images/avatar1.jpg" alt="avatar">
+                                        <img src="../staticFolder/images/avatar2.jpg" alt="avatar">
+                                        <img src="../staticFolder/images/avatar3.jpg" alt="avatar">
+                                        <p class="badge bg-warning d-block mt-2">{{ pending_task.task_priority }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>{{ pending_task.description | truncate_description(20) }}</p>
+                            </div>
+                            <div class="card-foot d-flex">
+                                <div class="subdetails">
+                                    {% if pending_task.end_date %}
+                                    <span>{{ pending_task.end_date.strftime('%Y-%m-%d %H:%M') }}</span>
+                                    {% endif %}
+                                    <span> <i class="bi bi-chat-square-text-fill"></i> 5</span>
+                                    <span> <i class="bi bi-link"></i></span>
+                                </div>
+                                <div class="project-title px-2 py-1">
+                                    {{ pending_task.project_title }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="none card shadow-sm pending">
+                    <p>No pending task</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container">
+            <h5 class="mb-3">Review Tasks:</h5>
+            <div class="row mb-4 task">
+                {% if review_tasks %}
+                {% for review_task in review_tasks %}
+                <div class="col-lg-4">
+                    <div class="card review">
+                        <a href="{{ url_for('taskdetails', task_id=review_task.id) }}">
+                            <div class="card-head">
+                                <h5 class="bg-primary px-3 py-1">{{ review_task.task_title }}</h5>
+                                <div class="card-subhead">
+                                    <div class="avatar">
+                                        <img src="../staticFolder/images/avatar1.jpg" alt="avatar">
+                                        <img src="../staticFolder/images/avatar2.jpg" alt="avatar">
+                                        <img src="../staticFolder/images/avatar3.jpg" alt="avatar">
+                                        <p class="badge bg-warning d-block mt-2">{{ review_task.task_priority }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>{{ review_task.description | truncate_description(20) }}</p>
+                            </div>
+                            <div class="card-foot d-flex">
+                                <div class="subdetails">
+                                    {% if review_task.end_date %}
+                                    <span>{{ review_task.end_date.strftime('%Y-%m-%d %H:%M') }}</span>
+                                    {% endif %}
+                                    <span> <i class="bi bi-chat-square-text-fill"></i> 5</span>
+                                    <span> <i class="bi bi-link"></i></span>
+                                </div>
+                                <div class="project-title px-2 py-1">
+                                    {{ review_task.project_title }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="none card shadow-sm review">
+                    <p>No task placed on review</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 goals">
+                    <div class="goal-head d-flex justify-content-between mb-3">
+                        <h5>Goals</h5>
+                        <!-- button trigger for add goal modal form -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#goalModal"
+                            data-bs-whatever="@mdo">+</button>
+                        <!-- add goal modal -->
+                        <div class="modal fade" id="goalModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Goal</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="POST" action="/add_goal">
+                                            <div class="mb-3">
+                                                <label for="goalSubject" class="label">Subject</label>
+                                                <div class="input-group">
+                                                    <input class="goalSubject form-control" id="goalSubject"
+                                                        name="goalSubject" value="" placeholder=" " type="text">
+                                                </div>
+                                                <div>
+                                                    <small class="text-danger">
+
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="target" class="label">Target Achievement</label>
+                                                <div class="input-group">
+                                                    <input class="target form-control" id="target" name="target"
+                                                        value="" placeholder=" " type="text">
+                                                </div>
+                                                <div>
+                                                    <small class="text-danger">
+
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Description</label>
+                                                <textarea class="form-control" id="message-text"
+                                                    name="message-text"></textarea>
+                                                <div>
+                                                    <small class="text-danger">
+
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <div class="col-6">
+                                                    <label for="goalStart" class="col-form-label">Start</label>
+                                                    <input class="mb-2 form-control" id="goalStart" name="goalStart"
+                                                        value="" placeholder=" " type="datetime-local">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="goalEnd" class="col-form-label">End</label>
+                                                    <input class="form-control" id="goalEnd" name="goalEnd" value=""
+                                                        placeholder=" " type="datetime-local">
+                                                </div>
+                                                <div>
+                                                    <small class="text-danger">
+
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="goalstatus">Status</label>
+                                                <select name="goalstatus" id="goalstatus"
+                                                    class="form-select form-select-lg mb-3"
+                                                    aria-label=".form-select-lg example">
+                                                    <option value="empty"></option>
+                                                    <option value="achieved">Achieved</option>
+                                                    <option value="active">Active</option>
+                                                    <option value="inactive">Inactive</option>
+                                                </select>
+                                                <div>
+                                                    <small class="text-danger">
+
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Add Goal</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if goals %}
+                    {% for goal in goals %}
+                    <div class="card">
+                        <h5>{{goal.subject}}</h5>
+                        <p>{{ goal.description }}</p>
+                        <p>{{ goal.target_achievement }}</p>
+                        <div class="card-foot d-flex justify-content-between align-items-center">
+                            <p>Due on {{ goal.end_date }}</p>
+                            <p class="status-text px-3 py-1">{{goal.status}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="none card shadow-sm">
+                        <p>No Goals added</p>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="col-lg-6 col-md-6 mt-3">
+                    <div class="card team">
+                        <h5>Team members</h5>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="card mb-3 p-3">
+                                        <div class="icon-member">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div class="team-details">
+                                            <h4>Member name</h4>
+                                            <h5>Member role</h5>
+                                            <div
+                                                class="member-subdetails d-flex justify-content-between align-items-center">
+                                                <div class="date">
+                                                    <span>joined </span>
+                                                    <span>date</span>
+                                                </div>
+                                                <div class="member-status px-2 py-1">
+                                                    Status
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card mb-3 p-3">
+                                        <div class="icon-member">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div class="team-details">
+                                            <h4>Member name</h4>
+                                            <h5>Member role</h5>
+                                            <div
+                                                class="member-subdetails d-flex justify-content-between align-items-center">
+                                                <div class="date">
+                                                    <span>joined </span>
+                                                    <span>date</span>
+                                                </div>
+                                                <div class="member-status px-2 py-1">
+                                                    Status
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card mb-3 p-3">
+                                        <div class="icon-member">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div class="team-details">
+                                            <h4>Member name</h4>
+                                            <h5>Member role</h5>
+                                            <div
+                                                class="member-subdetails d-flex justify-content-between align-items-center">
+                                                <div class="date">
+                                                    <span>joined </span>
+                                                    <span>date</span>
+                                                </div>
+                                                <div class="member-status px-2 py-1">
+                                                    Status
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card mb-3 p-3">
+                                        <div class="icon-member">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div class="team-details">
+                                            <h4>Member name</h4>
+                                            <h5>Member role</h5>
+                                            <div
+                                                class="member-subdetails d-flex justify-content-between align-items-center">
+                                                <div class="date">
+                                                    <span>joined </span>
+                                                    <span>date</span>
+                                                </div>
+                                                <div class="member-status px-2 py-1">
+                                                    Status
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="{{ url_for('team') }}" class="btn btn-outline-primary btn-lg">Load more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- ======= Footer ======= -->
-    <footer id="footer" data-aos="fade-down">
+    <footer id="footer">
         <div class="footer-top">
             <div class="container">
                 <div class="row">
 
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-info">
-                            <h3>Bootslander</h3>
-                            <p class="pb-3"><em>Qui repudiandae et eum dolores alias sed ea. Qui suscipit veniam
-                                    excepturi quod.</em>
+                            <h3>AchievoDash</h3>
+                            <p class="pb-3"><em>Stay connected with us for the latest updates and news on our products
+                                    and services.</em>
                             </p>
                             <p>
-                                A108 Adam Street <br>
-                                NY 535022, USA<br><br>
-                                <strong>Phone:</strong> +1 5589 55488 55<br>
-                                <strong>Email:</strong> info@example.com<br>
+                                37b second west circular road, <br>
+                                Benin City, Edo State<br><br>
+                                <strong>Phone:</strong> +234 805 7980 962<br>
+                                <strong>Email:</strong> israelnosakhare21@gmail.com<br>
                             </p>
                             <div class="social-links mt-3">
-                                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                                <a href="https://twitter.com/Izzy_windz/" class="twitter"><i
+                                        class="bx bxl-twitter"></i></a>
+                                <a href="https://web.facebook.com/israel.ajagboye/" class="facebook"><i
+                                        class="bx bxl-facebook"></i></a>
+                                <a href="https://www.instagram.com/izzywindz03/" class="instagram"><i
+                                        class="bx bxl-instagram"></i></a>
+                                <a href="https://medium.com/@isreal4christ21" class="google-plus"><i
+                                        class="bx bxl-medium"></i></a>
+                                <a href="https://www.linkedin.com/in/israel-ajagboye/" class="linkedin"><i
+                                        class="bx bxl-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
@@ -191,9 +752,9 @@
                     <div class="col-lg-2 col-md-6 footer-links">
                         <h4>Useful Links</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#home">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#about">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#services">Services</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
                         </ul>
@@ -202,18 +763,25 @@
                     <div class="col-lg-2 col-md-6 footer-links">
                         <h4>Our Services</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/collaboration.html">Collaboration</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/task.html">Task management</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/goal.html">Goal tracking</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/analytics.html">Performance analytics</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/integration.html">Integration capabilities</a>
+                            </li>
                         </ul>
                     </div>
 
                     <div class="col-lg-4 col-md-6 footer-newsletter">
                         <h4>Our Newsletter</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                        <form action="" method="post">
+                        <p>Subscribe to our newsletter and be the first to receive exclusive offers, product updates,
+                            and valuable insights delivered straight to your inbox.</p>
+                        <form action="mailto:israelnosakhare21@gmail.com" method="post">
                             <input type="email" name="email"><input type="submit" value="Subscribe">
                         </form>
 
@@ -225,10 +793,10 @@
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>Bootslander</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>AchievoDash</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                Designed by <a href="https://dr-savant21.github.io/Israel_Ajagboye_portfolio/">SavantcodeTech</a>
             </div>
         </div>
     </footer>
@@ -248,7 +816,11 @@
     <script src="../staticFolder/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="../staticFolder/vendor/php-email-form/validate.js"></script>
 
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- main js file -->
+    <script src="../staticFolder/js/dashboard.js"></script>
     <script src="../staticFolder/js/index.js"></script>
 </body>
 

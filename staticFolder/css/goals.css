@@ -1,0 +1,42 @@
+.card .icon-option i{
+    font-size: 24px;
+    display: none;
+    transition: 0.3s all ease-in-out;
+    cursor: pointer;
+}
+
+.card .icon-option .ul{
+    display: none;
+    list-style-type: none;
+    text-align: left;
+    background-color: white;
+    width: 150px;
+    padding: 10px ;
+    position: absolute;
+    left: 0;
+    border: 1px solid #e5e5e5;
+    z-index: 100;
+}
+
+.card .show .ul{
+    display: block;
+}
+
+.card .icon-option .ul a{
+    display: block;
+}
+
+.card .icon-option .ul a:hover{
+    background-color: #EEF0F3;
+}
+
+.card .icon-option{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+}
+
+.delete-icon-modal i{
+    font-size: 100px;
+    color: #F62D51;
+}

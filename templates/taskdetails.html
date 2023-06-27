@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AchievoDash -Empower Your Productivity. Unleash Your Potential</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../staticFolder/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../staticFolder/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../staticFolder/vendor/remixicon/remixicon.css">
+    <!-- main css file -->
+    <link rel="stylesheet" href="../staticFolder/css/styles.css">
+    <link rel="stylesheet" href="../staticFolder/css/dashboard.css">
+    <link rel="stylesheet" href="../staticFolder/css/task.css">
+
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <h1 class="logo"><a href="{{ url_for('index') }}">Techie</a></h1>
+            <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="getstarted" href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+
+        </div>
+    </header>
+
+    <main class="bg-light">
+        <div class="container d-flex align-items-center justify-content-between" id="home">
+
+            <!-- Trigger for offcanvas -->
+            <div class="d-flex align-items-center">
+                <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                    href="#offcanvasWithBothOptions" role="button" aria-controls="offcanvasWithBothOptions">
+                    <i class="bi bi-list text-dark" style="font-size: 30px"></i>
+                </a>
+                <h4 class="ms-2 my-0 d-sm-block d-none">{{ task.task_title }}</h4>
+            </div>
+
+            <aside>
+                <!-- offcanvas -->
+                <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                    aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">AchievoDash</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="list-group">
+                            <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-speedometer2"></i> &nbsp; Dashboard</li>
+                            </a>
+                            <a href="{{ url_for('projects') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-boxes"></i> &nbsp; Projects</li>
+                            </a>
+                            <a href="{{ url_for('task') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-card-checklist"></i> &nbsp; Tasks</li>
+                            </a>
+                            <a href="{{ url_for('team') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-people-fill"></i> &nbsp; Team members</li>
+                            </a>
+                            <a href="{{ url_for('calendar') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-calendar-date"></i> &nbsp; Project Calendar
+                                </li>
+                            </a>
+                            <a href="{{ url_for('goal') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-bag-heart"></i> &nbsp; Goals</li>
+                            </a>
+                            <a href="{{ url_for('profile') }}" class="text-decoration-none">
+                                <li class="list-group-item"><i class="bi bi-person-circle"></i> &nbsp; Profile</li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+
+        <div class="container d-flex justify-content-between align-items-center mb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('task') }}">Task</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Task details</li>
+                </ol>
+            </nav>
+
+            <button type="button" class="btn btn-danger" data-bs-target="#deleteTaskModal-{{ task.id }}"
+                data-bs-toggle="modal" data-bs-whatever="@mdo" data-bs-id="{{ task.id }}"><i class="bi bi-trash3"></i>
+                &nbsp; Delete task</button>
+
+            <!-- delete task modal -->
+            <div class="modal fade" id="deleteTaskModal-{{ task.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Task Permanently?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="delete-icon-modal text-center">
+                                <i class="bi bi-trash3"></i>
+                                <p>Are you sure you want to delete this task</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <form action="/delete_task/{{ task.id }}" method="post">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container details">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card shadow-sm">
+                        <a role="button" data-bs-toggle="modal" data-bs-target="#editTaskModal-{{ task.id }}"
+                            data-bs-whatever="@mdo" data-bs-id="{{ task.id }}">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <h5>{{task.task_title}}</h5>
+                        <p>{{ task.description }}.</p>
+                    </div>
+                    <div class="card shadow-sm">
+                        <div class="row">
+                            {% for task_image in task.task_images %}
+                            <div class="col-lg-4 col-md-6">
+                                <div class="img task-img">
+                                    <img src="{{ url_for('taskimage_view', task_image_id=task_image.id) }}"
+                                        alt="task img" class="img-fluid">
+                                    <p>{{ task_image.image_filename }}</p>
+                                    <a role="button" data-bs-toggle="modal"
+                                        data-bs-target="#deleteimgModal-{{ task_image.id }}" data-bs-whatever="@mdo"
+                                        data-bs-id="{{ task_image.id }}">
+                                        <div class="icon-delete">
+                                            <i class="bi bi-trash3-fill"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <form action="{{ url_for('upload_taskimage', task_id=task.id) }}" method="post"
+                                enctype="multipart/form-data">
+                                <div class="input">
+                                    <input type="file" name="task-img-file" id="task-img-file" class="btn btn-primary"
+                                        placeholder="Upload images">
+                                </div>
+                                <input type="submit" value="Upload image" class="btn btn-primary mt-2">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm">
+                        {% for file_item in file_items %}
+                        <div class="file filecard d-flex" style="gap: 2rem;">
+                            <div class="file-img">
+                                {% if file_item.file_type == 'image' %}
+                                <img src="../staticFolder/images/image-icon.png" alt="Image">
+                                {% elif file_item.file_type == 'document' %}
+                                <img src="../staticFolder/images/docs-icon.png" alt="Image">
+                                {% elif file_item.file_type == 'pdf' %}
+                                <img src="../staticFolder/images/pdf-img-2.png" alt="Image">
+                                {% elif file_item.file_type == 'video' %}
+                                <img src="../staticFolder/images/video-img.png" alt="Image">
+                                {% else %}
+                                <img src="../staticFolder/images/other-icon2.png" alt="Image">
+                                {% endif %}
+                            </div>
+                            <div class="file-details">
+                                <h5>{{ file_item.filename }}</h5>
+                                <a href="">{{ file_item.creator_username }}</a> <span>{{ file_item.created_at.strftime('%B %d, %Y at %I:%M %p') }}</span>
+                                <h6>size: {{ convert_file_size(file_item.file_size) }}</h6>
+                            </div>
+                            <div class="icon-option ms-auto">
+                                <i class="bi bi-three-dots-vertical"></i>
+                                <div class="ul">
+                                    <a href="{{ url_for('download_file', file_item_id=file_item.id) }}">Download</a>
+                                    <a role="button" data-bs-toggle="modal"
+                                    data-bs-target="#deletefileModal-{{ file_item.id }}" data-bs-whatever="@mdo"
+                                    data-bs-id="{{ file_item.id }}">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        {% endfor %}
+                        <div class="input">
+                            <form action="/taskfileupload/{{ task.id }}" method="post" enctype="multipart/form-data">
+                                <input type="file" name="task-file" id="task-file" class="btn btn-primary d-block"
+                                    placeholder="Upload file">
+                                <input type="submit" value="Upload file" class="btn btn-primary mt-2">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- delete file modal -->
+                {% for file_item in file_items %}
+                <div class="modal fade" id="deletefileModal-{{ file_item.id }}" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete File Permanently?</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="delete-icon-modal text-center">
+                                    <i class="bi bi-trash3"></i>
+                                    <p>Are you sure you want to delete this file?</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <form method="POST"
+                                    action="{{ url_for('delete_file', file_item_id=file_item.id) }}"
+                                    style="display: inline;">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="col-lg-4">
+                    <div class="card shadow-sm">
+                        <a role="button" data-bs-toggle="modal" data-bs-target="#editTaskDetailModal-{{ task.id }}"
+                            data-bs-whatever="@mdo" data-bs-id="{{ task.id }}">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <h4>Task details</h4>
+                        <div class="desc">
+                            <div class="project d-flex justify-content-between mt-3">
+                                <span>Project:</span>
+                                <span>{{task.project_title}}</span>
+                            </div>
+                            <div class="created_at d-flex justify-content-between mt-3">
+                                <span>Created on:</span>
+                                {% if created_at is defined %}
+                                <span>{{ created_at }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="created_at d-flex justify-content-between mt-3">
+                                <span>Started on:</span>
+                                {% if task.start_date %}
+                                <span>{{ task.start_date.strftime('%Y-%m-%d') }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="created_at d-flex justify-content-between mt-3">
+                                <span>Deadline:</span>
+                                {% if task.end_date %}
+                                <span>{{ task.end_date.strftime('%Y-%m-%d') }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="created_at d-flex justify-content-between mt-3">
+                                <span>priority:</span>
+                                <span>{{ task.task_priority }}</span>
+                            </div>
+                            <div class="created_at d-flex justify-content-between mt-3">
+                                <span>Created by:</span>
+                                {% if task.creator_username %}
+                                <span>{{ task.creator_username }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="created_at d-flex justify-content-between mt-3">
+                                <span>Status:</span>
+                                <span>{{ task.taskstatus }}</span>
+                            </div>
+                            <div class="progress-container mt-3 mb-3">
+                                <div class="progress-text">
+                                    <p>progress:</p>
+                                    <p>{{ time_remaining }} days left</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-sm">
+                        <div class="leader d-flex justify-content-between">
+                            <h4>Assigned Team</h4>
+                            <!-- button trigger for add team modal form -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#teamModal" data-bs-whatever="@mdo"><i
+                                    class="bi bi-plus-circle-fill"></i> &nbsp;
+                                Add</button>
+                        </div>
+                        <!-- add team modal -->
+                        <div class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Assign Team to this task
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="" method="post">
+                                            <div class="row">
+                                                <div class="col-lg-8 col-md-8">
+                                                    <input type="search" name="searchleaderSearch" id="leaderSearch"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                    <input type="submit" value="Search" class="btn btn-success">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="teamadded d-flex align-items-center mt-4" style="gap: 1.5rem;">
+                            <div class="img">
+                                <img src="../staticFolder/images/avatar1.jpg" alt="">
+                            </div>
+                            <div class="teamdetails">
+                                <h6 class="mb-0">Team member</h6>
+                                <p>Member role</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- edit task modal -->
+        <div class="modal fade" id="editTaskModal-{{ task.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Task</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/edit_task_id/{{ task.id }}">
+                            <div class="mb-3">
+                                <label for="projectTitle" class="label">Task Title</label>
+                                <div class="input-group">
+                                    <input class="projectTitle form-control" id="projectTitle" name="projectTitle"
+                                        value="{{task.task_title}}" placeholder=" " type="text">
+                                </div>
+                                <div>
+                                    <small class="text-danger">
+
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label">Task Description</label>
+                                <textarea class="form-control" id="message-text"
+                                    name="message-text">{{ task.description }}</textarea>
+                                <div>
+                                    <small class="text-danger">
+
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- edit task details modal -->
+        <div class="modal fade" id="editTaskDetailModal-{{ task.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Tasks Details</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/edit_task_details/{{ task.id }}">
+                            <div class="mb-3">
+                                <label for="projectTitle">Project title</label>
+                                <select name="projectTitle" id="projectTitle" class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example">
+                                    <option value="{{task.project_title}}">{{task.project_title}}</option>
+                                    {% for project in projects %}
+                                    <option value="{{ project.id }}" {% if project.id==task.project_id %}selected{%
+                                        endif %}>{{ project.title }}</option>
+                                    {% endfor %}
+                                </select>
+                                <div>
+                                    <small class="text-danger">
+
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="projectPriority" class="col-form-label">Priority</label>
+                                <select name="taskPriority" id="taskPriority" class="form-select">
+                                    <option value="Highest" {% if task.priority=="Highest" %}selected{% endif %}>Highest
+                                    </option>
+                                    <option value="High" {% if task.priority=="High" %}selected{% endif %}>High</option>
+                                    <option value="Medium" {% if task.priority=="Medium" %}selected{% endif %}>Medium
+                                    </option>
+                                    <option value="Low" {% if task.priority=="Low" %}selected{% endif %}>Low</option>
+                                    <option value="Lowest" {% if task.priority=="Lowest" %}selected{% endif %}>Lowest
+                                    </option>
+                                </select>
+                                <div>
+                                    <small class="text-danger">
+
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="taskstatus">Status</label>
+                                <select name="taskstatus" id="taskstatus" class="form-select">
+                                    <option value="empty"></option>
+                                    <option value="in-progress" {% if task.taskstatus=="in-progress" %}selected{% endif
+                                        %}>In Progress</option>
+                                    <option value="completed" {% if task.taskstatus=="completed" %}selected{% endif %}>
+                                        Completed</option>
+                                    <option value="on-hold" {% if task.taskstatus=="on-hold" %}selected{% endif %}>On
+                                        Hold</option>
+                                    <option value="review" {% if task.taskstatus=="review" %}selected{% endif %}>Review
+                                    </option>
+                                    <option value="pending" {% if task.taskstatus=="pending" %}selected{% endif %}>
+                                        Pending</option>
+                                </select>
+                                <div>
+                                    <small class="text-danger">
+
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-6">
+                                    <label for="projectStart" class="col-form-label">Start</label>
+                                    <input class="mb-2 form-control" id="projectStart" name="projectStart"
+                                        value="{{task.start_date}}" placeholder=" " type="datetime-local">
+                                </div>
+                                <div class="col-6">
+                                    <label for="projectEnd" class="col-form-label">End</label>
+                                    <input class="form-control" id="projectEnd" name="projectEnd"
+                                        value="{{task.end_date}}" placeholder=" " type="datetime-local">
+                                </div>
+                                <div>
+                                    <small class="text-danger">
+
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- delete task image modal -->
+        {% for task_image in task.task_images %}
+        <div class="modal fade" id="deleteimgModal-{{ task_image.id }}" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Image Permanently?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="delete-icon-modal text-center">
+                            <i class="bi bi-trash3"></i>
+                            <p>Are you sure you want to delete this image?</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <form method="POST" action="{{ url_for('delete_image_task', task_image_id=task_image.id) }}"
+                            style="display: inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-info">
+                            <h3>AchievoDash</h3>
+                            <p class="pb-3"><em>Stay connected with us for the latest updates and news on our products
+                                    and services.</em>
+                            </p>
+                            <p>
+                                37b second west circular road, <br>
+                                Benin City, Edo State<br><br>
+                                <strong>Phone:</strong> +234 805 7980 962<br>
+                                <strong>Email:</strong> israelnosakhare21@gmail.com<br>
+                            </p>
+                            <div class="social-links mt-3">
+                                <a href="https://twitter.com/Izzy_windz/" class="twitter"><i
+                                        class="bx bxl-twitter"></i></a>
+                                <a href="https://web.facebook.com/israel.ajagboye/" class="facebook"><i
+                                        class="bx bxl-facebook"></i></a>
+                                <a href="https://www.instagram.com/izzywindz03/" class="instagram"><i
+                                        class="bx bxl-instagram"></i></a>
+                                <a href="https://medium.com/@isreal4christ21" class="google-plus"><i
+                                        class="bx bxl-medium"></i></a>
+                                <a href="https://www.linkedin.com/in/israel-ajagboye/" class="linkedin"><i
+                                        class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#home">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#about">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/#services">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/collaboration.html">Collaboration</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/task.html">Task management</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/goal.html">Goal tracking</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/analytics.html">Performance analytics</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="../staticFolder/html/services/integration.html">Integration capabilities</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Our Newsletter</h4>
+                        <p>Subscribe to our newsletter and be the first to receive exclusive offers, product updates,
+                            and valuable insights delivered straight to your inbox.</p>
+                        <form action="mailto:israelnosakhare21@gmail.com" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>AchievoDash</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="https://dr-savant21.github.io/Israel_Ajagboye_portfolio/">SavantcodeTech</a>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+
+    <a href="#home" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="../staticFolder/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../staticFolder/vendor/aos/aos.js"></script>
+    <script src="../staticFolder/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../staticFolder/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../staticFolder/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../staticFolder/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../staticFolder/vendor/php-email-form/validate.js"></script>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- main js file -->
+    <script src="../staticFolder/js/taskdetails.js"></script>
+    <script src="../staticFolder/js/task.js"></script>
+    <script src="../staticFolder/js/index.js"></script>
+</body>
+
+</html>
